@@ -10,6 +10,7 @@ const SearchBar = ({ onSubmit }) => {
 
     if (!search) {
       toast.error("Text must be entered to search for images.");
+      return;
     }
 
     onSubmit(search);

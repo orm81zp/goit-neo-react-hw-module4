@@ -1,3 +1,25 @@
 .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
 
+.imageCard {
+  border-radius: 10px;
+  height: 350px;
+  width: 350px;
+  overflow: hidden;
+  transition: transform var(--trns-fast);
+}
+
+.imageCard:hover {
+  transform: scale(1.05);
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    gap: 24px;
+  }
 }
