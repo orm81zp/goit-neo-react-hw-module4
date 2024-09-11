@@ -7,6 +7,10 @@
   --color-primary-hover: #5869C9;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: sans-serif;
   line-height: 1.3;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Container from "../Container/Container";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import ImageGallery from "../ImageGallery/ImageGallery";
@@ -15,14 +15,40 @@ const App = () => {
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const { images, loadMore, fetchData, loading, error } = useFetch(query);
+  const galleryContainerRef = useRef(null);
+  const [timeoutId, setTimeoutId] = useState(null);
 
-  const handleShowMore = () => {
-    fetchData(query);
+  useEffect(() => {
+    return () => clearTimeout(timeoutId);
+  }, [timeoutId]);
+
+  const scrollTo = () => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+
+    const id = setTimeout(() => {
+      if (images.length > 0 && galleryContainerRef.current) {
+        const { height } = galleryContainerRef.current.getBoundingClientRect();
+        window.scroll({
+          top: height,
+          left: 0,
+          behavior: "smooth",
+        });
+      }
+    }, 0);
+
+    setTimeoutId(id);
+  };
+
+  const handleShowMore = async () => {
+    await fetchData(query);
+    scrollTo();
   };
 
   const onSubmit = async (query) => {
     setQuery(query);
-    fetchData(query, true);
+    await fetchData(query, true);
   };
 
   const onImageClick = (image) => {
@@ -43,7 +69,11 @@ const App = () => {
           {error ? (
             <ErrorMessage>{error}</ErrorMessage>
           ) : (
-            <ImageGallery images={images} onImageClick={onImageClick} />
+            <ImageGallery
+              images={images}
+              onImageClick={onImageClick}
+              ref={galleryContainerRef}
+            />
           )}
           {loading && <Loader />}
           {loadMore && <LoadMoreBtn onClick={handleShowMore} />}

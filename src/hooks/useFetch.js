@@ -10,23 +10,22 @@ const useFetch = () => {
   const [loading, setLoading] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
 
-  const resetData = () => {
-    setImages([]);
-    setPage(START_PAGE);
-  };
-
-  const fetchData = async (query, shouldClear = false) => {
+  const fetchData = async (query, shouldReset = false) => {
     try {
       setError("");
       setLoadMore(false);
       setLoading(true);
 
-      if (shouldClear) {
-        resetData();
+      let currentPage = page;
+
+      if (shouldReset) {
+        setImages([]);
+        setPage(START_PAGE);
+        currentPage = START_PAGE;
       }
 
       const { results, errors, total_pages } = await searchPhotos(query, {
-        page,
+        page: currentPage,
       });
 
       if (errors && Array.isArray(errors)) {
@@ -41,7 +40,7 @@ const useFetch = () => {
         return;
       }
 
-      const nextPage = page + 1;
+      const nextPage = currentPage + 1;
       setImages((prevImages) => [...prevImages, ...results]);
 
       if (nextPage <= total_pages) {
