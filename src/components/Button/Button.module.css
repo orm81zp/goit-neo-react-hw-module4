@@ -3,9 +3,10 @@
   background-color: #efefef;
   color: #000;
   border: 1px solid #b4b4b4;
-  padding: 8px 12px;
+  padding: 4px 12px;
   height: 32px;
   cursor: pointer;
+  transition: all var(--trns-fast);
 }
 
 .button:hover, 
@@ -15,13 +16,12 @@
 }
 
 .button.primary {
-  background-color: green;
+  background-color: var(--color-primary);
   color: white;
 }
 
 .button.primary:hover {
-  background-color: greenyellow;
-  color: black;
+  background-color: var(--color-primary-hover);
 }
 
 .button.secondary {

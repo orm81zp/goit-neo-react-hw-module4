@@ -1,6 +1,9 @@
 .container {
-  font-size: 18px;
-  font-weight: 500;
   padding: 16px 0;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.loaderWrapper svg {
+  fill: var(--color-primary);
 }

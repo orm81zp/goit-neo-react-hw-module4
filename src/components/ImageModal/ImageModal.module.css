@@ -1,9 +1,8 @@
 .overlay {
   position: fixed;
   z-index: 999;
-  background-color: rgba(0, 0, 0, 0.8);
-  animation-name: fade;
-  animation-duration: 1s;
+  background-color: var(--overlay);
+  animation: fade 1s ease-out;
   top: 0;
   left: 0;
   right: 0;
@@ -12,50 +11,41 @@
 
 .modal {
   position: fixed;
-  border: 1px solid rgb(204 204 204);
   background: rgb(255 255 255);
-  border-radius: 4px;
-  outline: none;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80vw;
   overflow: hidden;
-  max-height: 90vh;
-  aspect-ratio: 4 / 3;
+  height: 85vh;
 }
 
-.image {
+.content {
   position: relative;
   width: 100%;
   height: 100%;
-  animation-name: fade;
-  animation-duration: 1s;
 }
 
-.image img {
+.content img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.description {
+.footer {
+  position: absolute;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  position: absolute;
   bottom: 0;
-  background-color: #e6f0ff;
+  background-color: rgba(255, 255, 255, 0.85);
   padding: 10px;
+  border-top: 1px solid #111111;
 }
 
-@keyframes fade {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+.footerRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }

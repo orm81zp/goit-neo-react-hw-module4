@@ -1,5 +1,46 @@
+.header {
+  background-color: var(--color-primary);
+  box-shadow: var(--box-shadow);
+  padding: 8px 0;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchField {
+  padding: 3px 2px;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.searchField input {
+  border: none;
+  height: 100%;
+  flex-grow: 1;
+}
+
+.searchField input:focus, .searchField input:active  {
+  border: none;
+}
+
+.searchField button {
+  border: none;
+  background: none;
+  outline: none;
+}
+
 @media only screen and (min-width: 768px) {
   .container {
+    max-width: 380px;
+  }
+
+  .searchField {
     max-width: 380px;
   }
 }

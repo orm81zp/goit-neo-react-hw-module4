@@ -1,5 +1,7 @@
 .container {
   cursor: pointer;
+  display: block;
+  height: 100%;
 }
 
 .image {

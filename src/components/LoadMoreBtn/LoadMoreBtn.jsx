@@ -4,7 +4,7 @@ import css from "./LoadMoreBtn.module.css";
 const LoadMoreBtn = ({ onClick }) => {
   return (
     <div className={css.container}>
-      <Button onClick={onClick}>Load more</Button>
+      <Button onClick={onClick} varient="primary">Load more</Button>
     </div>
   );
 };

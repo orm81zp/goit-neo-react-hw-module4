@@ -7,19 +7,38 @@
 }
 
 .imageCard {
-  border-radius: 10px;
-  height: 350px;
-  width: 350px;
-  overflow: hidden;
+  height: 122px;
+  /* overflow: hidden; */
   transition: transform var(--trns-fast);
+  box-shadow: var(--box-shadow);
+  flex-basis: 184px;
 }
 
-.imageCard:hover {
+.imageCard:hover, .imageCard:focus {
   transform: scale(1.05);
+}
+
+@media only screen and (min-width: 480px) {
+  .container {
+    gap: 16px;
+  }
+  .imageCard {
+    flex-basis: calc((100% - 24px) / 2);
+  }
 }
 
 @media only screen and (min-width: 768px) {
   .container {
     gap: 24px;
   }
+  .imageCard {
+    flex-basis: calc((100% - 72px) / 4);
+  }
 }
+
+@media only screen and (min-width: 1440px) {
+.imageCard {
+    flex-basis: calc((100% - 120px) / 6);
+  }
+}
+
