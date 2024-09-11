@@ -8,7 +8,8 @@
 
 .imageCard {
   height: 122px;
-  /* overflow: hidden; */
+  overflow: hidden;
+  position: relative;
   transition: transform var(--trns-fast);
   box-shadow: var(--box-shadow);
   flex-basis: 184px;

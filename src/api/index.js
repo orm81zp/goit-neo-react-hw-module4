@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const { VITE_UNSPLASH_ACCESS_KEY } = import.meta.env;
 
 axios.defaults.baseURL = "https://api.unsplash.com";

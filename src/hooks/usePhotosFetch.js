@@ -1,27 +1,28 @@
 import { useState } from "react";
 import { searchPhotos } from "../api";
 
-const START_PAGE = 1;
+const initialPage = 1;
+const initialState = [];
 
-const useFetch = () => {
-  const [page, setPage] = useState(START_PAGE);
+const usePhotosFetch = () => {
+  const [page, setPage] = useState(initialPage);
   const [error, setError] = useState("");
-  const [images, setImages] = useState([]);
+  const [data, setData] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
 
-  const fetchData = async (query, shouldReset = false) => {
+  const fetchData = async (query, initialFetch = false) => {
     try {
+      let currentPage = page;
+
       setError("");
       setLoadMore(false);
       setLoading(true);
 
-      let currentPage = page;
-
-      if (shouldReset) {
-        setImages([]);
-        setPage(START_PAGE);
-        currentPage = START_PAGE;
+      if (initialFetch) {
+        setPage(initialPage);
+        setData(initialState);
+        currentPage = initialPage;
       }
 
       const { results, errors, total_pages } = await searchPhotos(query, {
@@ -29,19 +30,17 @@ const useFetch = () => {
       });
 
       if (errors && Array.isArray(errors)) {
-        setError(errors.join(", "));
+        setError(errors.join(". "));
         return;
-      }
-
-      if (results.length === 0) {
+      } else if (results.length === 0) {
         setError(
           "Whoops, Tere are no results for your request. Try something else..."
         );
         return;
       }
 
+      setData((prevData) => [...prevData, ...results]);
       const nextPage = currentPage + 1;
-      setImages((prevImages) => [...prevImages, ...results]);
 
       if (nextPage <= total_pages) {
         setLoadMore(true);
@@ -61,7 +60,7 @@ const useFetch = () => {
     }
   };
 
-  return { fetchData, error, images, loading, loadMore };
+  return { fetchData, error, data, loading, loadMore };
 };
 
-export default useFetch;
+export default usePhotosFetch;

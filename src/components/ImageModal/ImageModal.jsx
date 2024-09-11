@@ -27,10 +27,14 @@ const ImageModal = ({ isOpen, onClose, image }) => {
       <div className={css.content}>
         <img src={regular} alt={alt} />
         <div className={css.footer}>
-          {description && <h3>{description}</h3>}
+          {description && <h3 className={css.description}>{description}</h3>}
           {user && (
             <div className={css.footerRow}>
-              <FaUser /> <span>{user.name}</span>
+              <FaUser />{" "}
+              <span>
+                {user.name}
+                {user.location && ` (${user.location})`}
+              </span>
             </div>
           )}
           {likes && (
